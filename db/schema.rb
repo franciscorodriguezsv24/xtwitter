@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_162338) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_173208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_162338) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_bookmarks_on_author_id"
+    t.index ["tweet_id"], name: "index_bookmarks_on_tweet_id"
+  end
+
   create_table "hashtags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -35,6 +44,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_162338) do
     t.bigint "tweet_id", null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_likes_on_author_id"
+    t.index ["tweet_id"], name: "index_likes_on_tweet_id"
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.text "mention"
+    t.bigint "tweet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_quotes_on_tweet_id"
+  end
+
+  create_table "retweets", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_retweets_on_tweet_id"
+  end
+
+  create_table "tweetreplies", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "tweet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_tweetreplies_on_tweet_id"
+  end
+
   create_table "tweets", force: :cascade do |t|
     t.text "body"
     t.bigint "author_id", null: false
@@ -43,5 +84,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_162338) do
     t.index ["author_id"], name: "index_tweets_on_author_id"
   end
 
+  add_foreign_key "bookmarks", "authors"
+  add_foreign_key "bookmarks", "tweets"
+  add_foreign_key "likes", "authors"
+  add_foreign_key "likes", "tweets"
+  add_foreign_key "quotes", "tweets"
+  add_foreign_key "retweets", "tweets"
+  add_foreign_key "tweetreplies", "tweets"
   add_foreign_key "tweets", "authors"
 end
