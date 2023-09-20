@@ -10,18 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_212250) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_162338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "authors", force: :cascade do |t|
+    t.string "username"
     t.string "name"
     t.string "lastname"
-    t.string "username"
     t.string "email"
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "hashtags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hastags_tweets", id: false, force: :cascade do |t|
+    t.bigint "hastag_id", null: false
+    t.bigint "tweet_id", null: false
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.text "body"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_tweets_on_author_id"
+  end
+
+  add_foreign_key "tweets", "authors"
 end
