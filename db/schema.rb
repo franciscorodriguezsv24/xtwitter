@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_173208) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_194248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_173208) do
     t.index ["tweet_id"], name: "index_retweets_on_tweet_id"
   end
 
+  create_table "taggins", force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "hashtag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashtag_id"], name: "index_taggins_on_hashtag_id"
+    t.index ["tweet_id"], name: "index_taggins_on_tweet_id"
+  end
+
   create_table "tweetreplies", force: :cascade do |t|
     t.text "comment"
     t.bigint "tweet_id", null: false
@@ -90,6 +99,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_173208) do
   add_foreign_key "likes", "tweets"
   add_foreign_key "quotes", "tweets"
   add_foreign_key "retweets", "tweets"
+  add_foreign_key "taggins", "hashtags"
+  add_foreign_key "taggins", "tweets"
   add_foreign_key "tweetreplies", "tweets"
   add_foreign_key "tweets", "authors"
 end
