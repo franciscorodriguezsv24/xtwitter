@@ -6,4 +6,5 @@ class Tweet < ApplicationRecord
   has_many :tweet_replies
   has_many :likes
   validates :body, length: {maximum: 255}, presence: true
+  validates :retweet, confirmation: true 
 end
