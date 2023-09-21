@@ -10,6 +10,6 @@ class Tweet < ApplicationRecord
   validates_associated :author 
   validates_associated :bookmark
   validates_associated :like
-  
+
 
 end
