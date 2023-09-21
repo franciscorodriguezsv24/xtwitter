@@ -14,6 +14,10 @@ Based on the Twitter database model created in Lecture 3.1, add support for the 
 In this repository, we are creating the migrations and associations necessary to achieve the requirements from the lab.
 Things you may want to cover:
 
+you can find the module image in 
+
+/docs/DB_model_lab_1
+
 * Ruby and Ruby on Rails version
 
 - Ruby version: 3.1.2
