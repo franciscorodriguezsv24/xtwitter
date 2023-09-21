@@ -1,24 +1,55 @@
-# README
+# Xtwitter clone 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
+**Exercise Requirements:**
+
+Based on the Twitter database model created in Lecture 3.1, add support for the following features:
+
+- Tweet Replies
+- Bookmarks
+- Likes
+- Quotes
+- Retweets
+- Followers
+In this repository, we are creating the migrations and associations necessary to achieve the requirements from the lab.
 Things you may want to cover:
 
-* Ruby version
+* Ruby and Ruby on Rails version
 
-* System dependencies
+- Ruby version: 3.1.2
+- Rails version: 7.0.6
 
-* Configuration
+## Take care
 
-* Database creation
+You need to 
+Ruby and Rails Installation:
 
-* Database initialization
+Make sure you have Ruby and Rails installed on your system. You can download and install them from the official Ruby and Rails websites or use a version management tool like RVM.
 
-* How to run the test suite
+## Clone this repository
 
-* Services (job queues, cache servers, search engines, etc.)
+first of all you need to follow the next steps 
 
-* Deployment instructions
+1. Clone this repository to your local machine.
 
-* ...
+**git clone:** https://github.com/franciscoWork/xtwitter/tree/
+
+please don't try to clone the repositiry in the master branch, because it won't work proppertly 
+
+## Creating the database
+
+run the necessary migrations, follow these steps:
+Run the following commands to set up the database and execute the migrations:
+
+- rails db:create
+- rails db:migrate
+
+## Running the application 
+
+- rails server 
+
+## Testing 
+
+- rails test 
+
+

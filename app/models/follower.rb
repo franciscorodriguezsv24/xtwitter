@@ -1,2 +1,3 @@
 class Follower < ApplicationRecord
+    has_and_belongs_to :authors
 end
