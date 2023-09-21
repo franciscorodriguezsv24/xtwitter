@@ -1,5 +1,6 @@
 FactoryBot.define do
-  factory :hashtag do
+  factory :hastag do
     name { "MyString" }
+    tweets { "MyString" }
   end
 end

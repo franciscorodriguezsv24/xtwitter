@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :tweetreply do
+  factory :tweet_reply do
     comment { "MyText" }
     tweet { nil }
   end
