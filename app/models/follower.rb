@@ -1,5 +1,6 @@
 class Follower < ApplicationRecord
-    has_and_belongs_to :authors
+    has_and_belongs_to_many :authors
+    validates_associated :authors
 
     # Add uniqueness validation for follower_id and follwee_id, a user can only follows another user once
 
