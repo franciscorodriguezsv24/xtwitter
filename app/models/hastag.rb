@@ -1,0 +1,2 @@
+class Hastag < ApplicationRecord
+end
