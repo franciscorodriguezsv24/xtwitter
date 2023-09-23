@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :tweetreply do
     tweet { nil }
-    comment { "MyText" }
+    user { nil }
+    body { "MyText" }
   end
 end
