@@ -3,6 +3,7 @@ class Tweet < ApplicationRecord
   has_many :likes
   has_many :tweetreplies
   has_many :taggins
+  has_many :hastags, through: :taggins
   belongs_to :user
   belongs_to :quoted_tweet, class_name: 'Tweet', foreign_key: 'quote_id', optional: true
   validates :body, length: { maximum: 255}
@@ -13,19 +14,49 @@ class Tweet < ApplicationRecord
   scope :with_retweet_count, -> { select("tweets.*, COUNT(*) AS retweet_count").where(retweet: true).group("tweets.id") }
 
 
-#method 
+#method retweet 
 
-  def retweet(user)
-    if user.has_permission_to_retweet?
-      retweet = self.dup
-      retweet.user = user
-      retweet.original_tweet = self
-      retweet.save
-    end
+def self.retweet(tweet, user)
+  retweet = Tweet.new(
+    content: "RT @#{tweet.user.username}: #{tweet.content}",
+    user: user
+  )
+
+  if retweet.save
+
     return retweet
-    else
-      return nil
-    end
+  else
+    return nil 
   end
+end
 
+#method quote
+
+def self.create_quote_tweet(user_id, body, tweet_id)
+
+  quote_tweet = Tweet.new(
+    user_id: user_id
+    body: body
+    quote_id: tweet_id
+  )
+
+  if quote_tweet.save
+
+  return quote_tweet
+
+  else nil 
+
+    #method hastags
+    def create_of_find_hasgtags(text)
+      hashtags = text.scan(/#\w+/)
+
+      hashtags.each do |tag| 
+        hashtag_name = tag[1..-1]
+        hashtag = hashtag.find_or_create_by(name: hashtag_name)
+
+        unless hastags.include?(hastag)
+          self.hastags << hashtag 
+        end
+      end
+    end
 end
