@@ -1,14 +1,14 @@
 class User < ApplicationRecord
-    has_many :follower, class_name: 'follower', foreign_key:'follower_id'
-    has_many :followee, class_name: 'follower', foreign_key:'followee_id'
+    has_many :followers, foreign_key: 'follower_id'
+    has_many :followees, foreign_key: 'followee_id', class_name: 'Follower'
     has_many :tweets
     has_many :likes
     has_many :bookmarks
     validates_associated :tweets
     validates_associated :likes
     validates_associated :bookmarks
-    validates_associated :followee, class_name: 'follower', foreign_key:'followee_id'
-    validates_associated :follower, class_name: 'follower', foreign_key:'follower_id'
+    validates_associated :followers, message: 'Invalid follower association'
+    validates_associated :followees, message: 'Invalid followee association'
 
 
 # validations 

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :follower do
-    follower { "" }
-    followee { "" }
+    follower_id { 1 }
+    followee_id { 1 }
   end
 end
