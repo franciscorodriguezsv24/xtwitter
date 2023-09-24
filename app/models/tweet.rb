@@ -13,5 +13,19 @@ class Tweet < ApplicationRecord
   scope :with_retweet_count, -> { select("tweets.*, COUNT(*) AS retweet_count").where(retweet: true).group("tweets.id") }
 
 
+#method 
+
+  def retweet(user)
+    if user.has_permission_to_retweet?
+      retweet = self.dup
+      retweet.user = user
+      retweet.original_tweet = self
+      retweet.save
+    end
+    return retweet
+    else
+      return nil
+    end
+  end
 
 end
