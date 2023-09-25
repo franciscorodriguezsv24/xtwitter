@@ -58,5 +58,5 @@ def self.create_quote_tweet(user_id, body, tweet_id)
           self.hastags << hashtag 
         end
       end
-    end
+    end 
 end
