@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2023_09_24_043432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +79,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_043432) do
   end
 
   create_table "users", force: :cascade do |t|
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_010155) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "authors", force: :cascade do |t|
+>>>>>>> master
     t.string "username"
     t.string "name"
     t.string "lastname"
@@ -87,6 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_043432) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   add_foreign_key "bookmarks", "tweets"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "followers", "users", column: "followee_id"
@@ -99,4 +108,71 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_043432) do
   add_foreign_key "tweetreplies", "users"
   add_foreign_key "tweets", "tweets", column: "quote_id"
   add_foreign_key "tweets", "users"
+=======
+  create_table "authors_followers", id: false, force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "follower_id", null: false
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_bookmarks_on_author_id"
+  end
+
+  create_table "followers", force: :cascade do |t|
+    t.string "follower_person"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hastags", force: :cascade do |t|
+    t.string "name"
+    t.string "tweets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hastags_tweets", id: false, force: :cascade do |t|
+    t.bigint "hastag_id", null: false
+    t.bigint "tweet_id", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_likes_on_author_id"
+  end
+
+  create_table "tweet_replies", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "tweet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_tweet_replies_on_tweet_id"
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.text "body"
+    t.bigint "author_id", null: false
+    t.boolean "retweet"
+    t.string "quote_id"
+    t.bigint "bookmark_id", null: false
+    t.bigint "like_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_tweets_on_author_id"
+    t.index ["bookmark_id"], name: "index_tweets_on_bookmark_id"
+    t.index ["like_id"], name: "index_tweets_on_like_id"
+  end
+
+  add_foreign_key "bookmarks", "authors"
+  add_foreign_key "likes", "authors"
+  add_foreign_key "tweet_replies", "tweets"
+  add_foreign_key "tweets", "authors"
+  add_foreign_key "tweets", "bookmarks"
+  add_foreign_key "tweets", "likes"
+>>>>>>> master
 end
