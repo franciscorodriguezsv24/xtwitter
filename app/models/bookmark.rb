@@ -1,5 +1,4 @@
 class Bookmark < ApplicationRecord
-<<<<<<< HEAD
   belongs_to :tweet
   belongs_to :user
   validates_uniqueness_of :tweet_id, scope: :user_id 
@@ -9,10 +8,5 @@ class Bookmark < ApplicationRecord
   scope :bookmark_by_user, ->(user_id) { where(user_id: user_id) }
 
   scope :tweets_with_bookmark, ->(tweet_id) { where(tweet_id: tweet_id) }
-=======
-  belongs_to :author
-  has_many :tweets
-  validates_associated :author
 
->>>>>>> master
 end
