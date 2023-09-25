@@ -32,11 +32,11 @@ end
 
 #method quote
 
-def self.create_quote_tweet(user_id, body, tweet_id)
+def self.create_quote_tweet(user, text, tweet_id)
 
   quote_tweet = Tweet.new(
-    user_id: user_id
-    body: body
+    user_id: user_id, 
+    body: text, 
     quote_id: tweet_id
   )
 
@@ -45,6 +45,8 @@ def self.create_quote_tweet(user_id, body, tweet_id)
   return quote_tweet
 
   else nil 
+  end
+end 
 
     #method hastags
     def create_of_find_hasgtags(text)
