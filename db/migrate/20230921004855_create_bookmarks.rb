@@ -1,7 +1,6 @@
-class CreateXweets < ActiveRecord::Migration[7.0]
+class CreateBookmarks < ActiveRecord::Migration[7.0]
   def change
-    create_table :xweets do |t|
-      t.text :body
+    create_table :bookmarks do |t|
       t.references :author, null: false, foreign_key: true
 
       t.timestamps

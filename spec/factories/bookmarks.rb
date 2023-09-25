@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :xweet do
-    body { "MyText" }
+  factory :bookmark do
     author { nil }
   end
 end
