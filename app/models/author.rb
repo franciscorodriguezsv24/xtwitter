@@ -6,9 +6,9 @@ class Author < ApplicationRecord
 
     validates :username, :email, uniqueness: true, presence: true 
     validates :name, presence: true 
-    validates :lastname presence: true 
-    validates :password, presence: true, length:{ maximum: 12}
-
+    validates :lastname, presence: true 
+    validates :password, presence: true, length:{ maximum: 12}, format: {with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@\/\*\-\+\_])[A-Za-z\d!@\/\*\-\+\_]{8,}\z/} 
+ 
 
     # Add presence validation for email and username 
     # Add Uniqueness validation for email and username
