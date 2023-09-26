@@ -18,7 +18,7 @@ class Tweet < ApplicationRecord
 
 def self.retweet(tweet, user)
   retweet = Tweet.new(
-    content: "RT @#{tweet.user.username}: #{tweet.content}",
+    content: "RT @#{tweet.user_id.username}: #{tweet.body}",
     user: user
   )
 
