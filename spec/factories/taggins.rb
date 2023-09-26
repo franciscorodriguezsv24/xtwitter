@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :taggin do
-    tweet { nil }
-    hastag { nil }
+    tweet { association :tweet }
+    hastag { association :hastag }
   end
 end

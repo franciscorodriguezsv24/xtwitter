@@ -6,4 +6,11 @@ RSpec.describe Bookmark, type: :model do
       it {should belong_to(:user)}
    end
    
+   it 'return a hastag' do
+      hastag = create(:bookmark)
+      end 
+
+   describe 'validation' do 
+      it { should validate_uniqueness_of(:tweet_id).scoped_to(:user_id) }
+   end 
 end

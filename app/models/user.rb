@@ -7,13 +7,13 @@ class User < ApplicationRecord
 
 
 
-# # validations 
-#     validates :username, presence: true
-#     validates :username, uniqueness: true
-#     validates :name, presence: true
-#     validates :lastname, presence: true 
-#     validates :email, presence: true
-#     validates :email, uniqueness: true 
-#     validates :password, format: { with: /\A.../ }
-#     validates :password, presence: true, length: { minimum: 12 }
+# validations 
+    validates :username, presence: true
+    validates :username, uniqueness: true
+    validates :name, presence: true
+    validates :lastname, presence: true 
+    validates :email, presence: true
+    validates :email, uniqueness: true 
+    validates :password, format: { with: /\A.../ }
+    validates :password, presence: true, length: { minimum: 12 }
 end

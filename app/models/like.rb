@@ -4,6 +4,8 @@ class Like < ApplicationRecord
   belongs_to :user
   validates_uniqueness_of :tweet_id, scope: :user_id 
 
+  
+
   #method 
   def liked(user_id)
     likes.create(user_id: user_id) unless liked_by?(user_id)

@@ -7,4 +7,12 @@ RSpec.describe Like, type: :model do
 
 end 
 
+it 'return a like' do 
+  like = create(:like)
+end 
+
+describe 'validation'do 
+it { should validate_uniqueness_of(:tweet_id).scoped_to(:user_id) }
+end 
+
 end
