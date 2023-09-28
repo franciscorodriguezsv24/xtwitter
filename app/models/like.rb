@@ -11,9 +11,14 @@ class Like < ApplicationRecord
     Like.create(tweet_id: tweet_id, user_id: user_id)
   end
 
-  def unlike(tweet_id, user_id)
-    like = likes.find_by(user_id: user_id)
-    like.destroy if like 
+  def self.disliked(tweet_id, user_id)
+    like = Like.find_by(tweet_id: tweet_id, user_id: user_id)
+    
+    if like
+      like.destroy
+    else
+      nil
+    end
   end
 
 end
