@@ -67,21 +67,3 @@ end
     end 
 
 end
-
-#retweetear
-# class Tweet < ApplicationRecord
-#   # ...
-
-#   def retweet(user_id)
-#     if !self.is_retweet
-#       retweet = self.dup  # Creamos una copia del tweet
-#       retweet.user_id = user_id  # Establecemos el nuevo usuario que realiza el retweet
-#       retweet.is_retweet = true  # Indicamos que es un retweet
-#       retweet.save  # Guardamos el retweet en la base de datos
-
-#       return retweet
-#     else
-#       return nil  # No se puede retwittear un retweet
-#     end
-#   end
-# end
