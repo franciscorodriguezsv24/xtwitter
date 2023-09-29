@@ -150,10 +150,12 @@ RSpec.describe "users", type: :request do
     
     describe "Post /like" do
         it "returns http success" do
-        post like_tweet_path(:like)
+            tweet1 = create(:tweet)
+            user1 = create(:user)
+        post like_tweet_path(:like)  
 
         expect(response.status).to eq(200)
-        expect(response).to match_response_schema("tweet")
+        expect(response).to match_response_schema("like")
         end  
     end 
 
@@ -175,7 +177,7 @@ RSpec.describe "users", type: :request do
         end 
     end 
 
-    describe "post/ quote" do 
+    describe "post /quote" do 
         it "returns http success" do 
             post quote_tweet_path(:tweet)
 
@@ -184,7 +186,7 @@ RSpec.describe "users", type: :request do
         end 
     end 
     
-    describe "post/ reply" do 
+    describe "post /reply" do 
         it "returns http success" do 
             post reply_tweet_path(:reply)
 

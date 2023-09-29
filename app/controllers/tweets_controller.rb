@@ -15,9 +15,33 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
   end
 
-  # GET /tweets/1/edit
-  def dislike_tweet
+  def liked
+
+    @like = Like.create
   end
+
+  # GET /tweets/1/edit
+  def disliked
+  
+    like = Like.find(params[:tweet_id])
+    render json: like.tweets
+  end
+
+  def bookmark
+
+  end
+
+  def reply
+
+  end
+
+  def quote
+
+  end 
+
+  def retweet
+  end 
+
 
   # POST /tweets or /tweets.json
   def create
