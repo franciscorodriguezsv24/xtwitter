@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :users, only:[:create, :update, :show] do
     member do 
       get 'tweets(/page/:page)', to: 'users#tweets'
-      get 'tweets_replies(/page/:page)', to: 'users#tweets_and_replies'
+      get 'tweets_replies(/page/:page)', to: 'users#tweets_replies'
 
     end 
   end 
