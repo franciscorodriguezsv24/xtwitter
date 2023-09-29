@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+ 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -13,6 +14,8 @@ Rails.application.routes.draw do
       post 'quote', to: 'tweets#create_quote_tweet'
       post 'reply', to: 'tweets#create_reply'
       post 'bookmark', to: 'tweets#bookmarked'
+      patch 'tweets', to: 'tweets#update'
+      put 'tweets', to: 'tweets#update'
     end
   end 
 
