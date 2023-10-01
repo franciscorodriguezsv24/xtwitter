@@ -1,5 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'association' do
+    it{should belong_to(:tweet)}
+    it{should belong_to(:user)} 
+
+end 
+
+it 'return a like' do 
+  like = create(:like)
+end 
+
+describe 'validation'do 
+      it { should validate_uniqueness_of(:tweet_id)}
+      it { should validate_presence_of(:user_id)}
+end 
+
 end

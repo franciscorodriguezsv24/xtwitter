@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :hastag do
-    name { "MyText" }
-    tweet { "MyText" }
+    name {"##{Faker::Lorem.paragraph(sentence_count: 2)}"}
+    tweet {Faker::Lorem.paragraph(sentence_count: 2)}
   end
 end

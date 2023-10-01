@@ -6,20 +6,23 @@ class Tweet < ApplicationRecord
   has_many :hastags, through: :taggins
   belongs_to :user
   belongs_to :quoted_tweet, class_name: 'Tweet', foreign_key: 'quote_id', optional: true
-  validates :body, length: { maximum: 255}
+  validates :body, length: { in: 5..255}
 
   #scopes  
-  scope :tweets_by_user, ->(user_id) { where(user_id: user_id) }
+  scope :tweets_by_user, ->(user_id) {where(user_id: user_id)}
 
-  scope :with_retweet_count, -> { select("tweets.*, COUNT(*) AS retweet_count").where(retweet: true).group("tweets.id") }
+  scope :with_replies_count, ->(user_id) {includes(:tweetreplies).where(tweetreplies: {user_id: user_id})}
 
+  #scopes quote
+
+  scope :your_quote_tweets, ->(user_id) {}
 
 #method retweet 
 
-def self.retweet(tweet, user)
+def self.retweet(tweet_id, user_id)
   retweet = Tweet.new(
-    content: "RT @#{tweet.user.username}: #{tweet.content}",
-    user: user
+    
+    retweet: true
   )
 
   if retweet.save
@@ -32,18 +35,15 @@ end
 
 #method quote
 
-def self.create_quote_tweet(user, text, tweet_id)
+def self.create_quote_tweet(user_id, text, tweet_id)
 
   quote_tweet = Tweet.new(
-    user_id: user_id, 
     body: text, 
+    user_id: user_id,
     quote_id: tweet_id
   )
-
   if quote_tweet.save
-
   return quote_tweet
-
   else nil 
   end
 end 

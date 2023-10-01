@@ -4,11 +4,7 @@ class User < ApplicationRecord
     has_many :tweets
     has_many :likes
     has_many :bookmarks
-    validates_associated :tweets
-    validates_associated :likes
-    validates_associated :bookmarks
-    validates_associated :followers, message: 'Invalid follower association'
-    validates_associated :followees, message: 'Invalid followee association'
+
 
 
 # validations 

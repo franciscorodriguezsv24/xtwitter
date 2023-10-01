@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :tweet do
-    body { "MyText" }
-    user { nil }
+    body { Faker::Lorem.paragraph(sentence_count: 2)}
+    user { association :user }
     retweet { false }
-    quote_id { 1 }
+    quote_id { nil }
 
   end
 end
