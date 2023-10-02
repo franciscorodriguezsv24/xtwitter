@@ -55,31 +55,10 @@ RSpec.describe Tweet, type: :model do
         expect(tweetreplies.count).to eq(1)
         expect(tweetreplies.includes(:tweetreplies).where(tweetreplies: {user_id: user.id}).count).to eq(1)
       end
-    end
-
-    
+    end 
   end
-
-
 end 
 
-
-# RSpec.describe YourModel do
-#   describe '.with_replies_count' do
-#     it 'returns the expected results' do
-#       # Crea algunos objetos de prueba para tu modelo
-#       user_id = 1  # Reemplaza esto con el ID de usuario adecuado
-#       user = User.create(id: user_id)
-#       tweet = Tweet.create(user_id: user_id)
-#       tweet_reply = Tweetreply.create(user_id: user_id, tweet_id: tweet.id)
-
-#       # Utiliza el scope para obtener los resultados
-#       results = YourModel.with_replies_count(user_id)
-
-#       # Verifica si los resultados son los esperados
-#       expect(results).to include(tweet)  # Asegúrate de que el tweet esté presente en los resultados
-#       expect(results).to_not include(user)  # Asegúrate de que el usuario no esté presente en los resultados
-#       expect(results).to_not include(tweet_reply)  # Asegúrate de que la respuesta al tweet no esté presente en los resultados
-#     end
-#   end
-# end
+RSpec.describe "routes for tweets", type: :routing do
+  # tests go here
+ end

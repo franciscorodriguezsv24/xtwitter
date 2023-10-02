@@ -15,7 +15,11 @@ class Tweet < ApplicationRecord
 
   #scopes quote
 
-  scope :your_quote_tweets, ->(user_id) {}
+  scope :quotes_count_by_user, ->(user_id) {
+  where(user_id: user_id, is_quote: true)
+    .select("COUNT(*) AS quotes_count")
+    .group("user_id")
+}
 
 #method retweet 
 

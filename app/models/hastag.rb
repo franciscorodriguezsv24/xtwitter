@@ -1,5 +1,5 @@
 class Hastag < ApplicationRecord
-    has_many :taggins
+    has_many:taggins 
     validates :name, presence: true
 
 end
