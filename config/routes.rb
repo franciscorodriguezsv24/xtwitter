@@ -4,12 +4,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-
+  namespace :api, defaults: {format: :json} do
   resources :tweets, only:[:new, :create, :update] do 
     member do 
       get 'stats', to: 'tweets#stats'
       post 'like', to: 'tweets#liked'
-      delete 'dislike', to: 'tweets#disliked'
+      delete 'dislike', to: 'tweets#destroy'
       post 'retweet', to: 'tweets#retweet'
       post 'quote', to: 'tweets#create_quote_tweet'
       post 'reply', to: 'tweets#create_reply'
@@ -26,6 +26,5 @@ Rails.application.routes.draw do
 
     end 
   end 
-
-
+end
 end
