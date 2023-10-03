@@ -296,7 +296,7 @@ RSpec.describe "users", type: :request do
       expect(response).to have_http_status(:created)
     end
   end 
-  
+
   context "with valid params" do
     it 'returns 201 status response for creating a new tweet' do
       post api_tweets_path, :params => valid_params
