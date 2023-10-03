@@ -8,14 +8,12 @@ class Like < ApplicationRecord
 
   #method 
   def self.liked(tweet_id, user_id)
-  like =  Like.create(tweet_id: tweet_id, user_id: user_id)
-
-  like.save 
+  Like.create(tweet_id: tweet_id, user_id: user_id)
   end
 
   def self.disliked(like_id)
-    like = Like.find(like_id)
-    if liked exists?
+    like = Like.find_by(id: like_id)
+    if like 
     like.destroy
     else
       nil

@@ -39,9 +39,12 @@ RSpec.describe Like, type: :model do
 
     describe 'delete a like', unlike: true do 
       it 'Deleting a like' do 
-        like_id = like1.id      
+        like_id = like1.id     
+        user_id = user1.id
+        tweet_id = tweet1.id
+
         delete_like = Like.disliked(like_id)
-        expect(delete_like).to_not have_attributes(:tweet_id => tweet_id, :user_id => user_id)
+        expect(delete_like).to have_attributes(:tweet_id => tweet_id, :user_id => user_id)
 
       end 
     end 
