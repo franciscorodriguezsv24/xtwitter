@@ -67,5 +67,10 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "json-schema"
+ 
   
 end
+
+# Use this gems to create authentication 
+  gem 'jwt'
+  gem 'devise'

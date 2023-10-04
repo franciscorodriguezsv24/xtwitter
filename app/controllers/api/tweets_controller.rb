@@ -61,33 +61,45 @@ class Api::TweetsController < Api::ApiController
 
 
     # # POST /tweets/:id/retweet
-    # def retweet
-    #   user = User.find(params[:user_id]) # Obtener el usuario desde los parámetros
-    #   @retweet = @tweet.retweet(user)
+    def retweet
+      user = User.find(params[:user_id]) # Obtener el usuario desde los parámetros
+      @retweet = @tweet.retweet(user)
 
-    #   if @retweet
-    #     render status: :created
-    #   else
-    #     render status: :unprocessable_entity
-    #   end
-    # end
+      if @retweet
+        render status: :created
+      else
+        render status: :unprocessable_entity
+      end
+    end
 
 
     # POST /tweets/:id/like
     def like
       user = User.find(params[:user_id])
-      @liked = @tweet.likes(user)
+      @like = @tweet.likes(user)
 
-      unless @liked
-          render_errors(@liked)
+      unless @like
+          render_errors(@like)
       end
   end
+  
+  def like
+
+  @like = Like.create
+  @like = Like.create(like_params)
+  if @like.save
+    render json: @like, status: :created
+  else
+    # Manejar errores de validación u otros casos
+    render json: @like.errors, status: :unprocessable_entity
+  end
+end
 
 
 
     # DELETE /tweets/:id/unlike
-    def unlike
-        @unlike = Like.find_by(user_id: @tweet.user_id, tweet_id: @tweet.id)
+    def destroy
+        @unlike = Like.find_by(@like.id)
         unless @unlike&.destroy
             render json: { errors: ["Like not found or could not be deleted"] }, status: :unprocessable_entity
         end
@@ -96,13 +108,15 @@ class Api::TweetsController < Api::ApiController
 
     # POST /tweets/:id/bookmark
     def bookmark
-        user = User.find(params[:user_id])
-        @bookmark = @tweet.bookmark(user)
-
-        unless @bookmark.valid?
-            render_errors(@liked)
+        @bookmark = Bookmark.create
+        @bookmark = Bookmark.create(bookmark_params)
+        if @bookmark.save
+          render json: @bookmark, status: :created
+        else
+          # Manejar errores de validación u otros casos
+          render json: @nookmark.errors, status: :unprocessable_entity
         end
-    end
+      end
     
     
     # DELETE /tweets/:id/unbookmark
@@ -123,4 +137,13 @@ class Api::TweetsController < Api::ApiController
     def tweet_params
         params.require(:tweet).permit(:body, :user_id)
     end
+
+    def like_params
+      params.require(:like).permit(:user_id, :tweet_id,)
+    end
+
+    def bookmark_params
+      params.require(:bookmark).permit(:user_id, :tweet_id,)
+    end
 end
+

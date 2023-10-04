@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
   resources :tweets, only:[:new, :create, :update] do 
     member do 
+      get 'index', to: 'tweets#index'
       get 'stats', to: 'tweets#stats'
       post 'like', to: 'tweets#like'
       delete 'dislike', to: 'tweets#destroy'
