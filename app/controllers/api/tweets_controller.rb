@@ -49,38 +49,40 @@ class Api::TweetsController < Api::ApiController
       original_tweet = @tweet
       current_user = tweet_params[:user_id]
   
-      @quote_tweet = Tweet.new(user_id: current_user, content: tweet_params[:content], quote_id: original_tweet.id)
+      @quote_tweet = Tweet.new(user_id: current_user, body: tweet_params[:body], quote_id: original_tweet.id)
 
       if @quote_tweet.save
         render status: :created
       else
         render status: :unprocessable_entity
       end
+      
     end
 
 
-    # POST /tweets/:id/retweet
-    def retweet
-      user = User.find(params[:user_id]) # Obtener el usuario desde los parámetros
-      @retweet = @tweet.retweet(user)
+    # # POST /tweets/:id/retweet
+    # def retweet
+    #   user = User.find(params[:user_id]) # Obtener el usuario desde los parámetros
+    #   @retweet = @tweet.retweet(user)
 
-      if @retweet
-        render status: :created
-      else
-        render status: :unprocessable_entity
-      end
-    end
+    #   if @retweet
+    #     render status: :created
+    #   else
+    #     render status: :unprocessable_entity
+    #   end
+    # end
 
 
     # POST /tweets/:id/like
     def like
-        user = User.find(params[:user_id])
-        @liked = @tweet.like(user)
+      user = User.find(params[:user_id])
+      @liked = @tweet.likes(user)
 
-        unless @liked
-            render_errors(@liked)
-        end
-    end
+      unless @liked
+          render_errors(@liked)
+      end
+  end
+
 
 
     # DELETE /tweets/:id/unlike
@@ -119,6 +121,6 @@ class Api::TweetsController < Api::ApiController
     end
 
     def tweet_params
-        params.require(:tweet).permit(:content, :user_id)
+        params.require(:tweet).permit(:body, :user_id)
     end
 end

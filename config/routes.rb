@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   resources :tweets, only:[:new, :create, :update] do 
     member do 
       get 'stats', to: 'tweets#stats'
-      post 'like', to: 'tweets#liked'
+      post 'like', to: 'tweets#like'
       delete 'dislike', to: 'tweets#destroy'
       post 'retweet', to: 'tweets#retweet'
-      post 'quote', to: 'tweets#create_quote_tweet'
+      post 'quote', to: 'tweets#quote'
       post 'reply', to: 'tweets#create_reply'
-      post 'bookmark', to: 'tweets#bookmarked'
+      post 'bookmark', to: 'tweets#bookmark'
       patch 'tweets', to: 'tweets#update'
       put 'tweets', to: 'tweets#update'
     end

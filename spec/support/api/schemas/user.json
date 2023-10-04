@@ -5,10 +5,7 @@
     "user" : {
       "type" : "object",
       "required" : [
-        "id",
         "username",
-        "name",
-        "lastname",
         "email",
         "password"
       ],
