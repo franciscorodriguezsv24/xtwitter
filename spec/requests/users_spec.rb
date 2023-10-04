@@ -1,76 +1,48 @@
 require 'rails_helper'
 
-RSpec.describe "/users", type: :request do
-    
-    describe "Post /users", http: true do
-        let(:user1) {create(:user)}
+RSpec.describe "Users", type: :request do
 
-        it "returns http success" do
+  let(:user) { create(:user) }
+  let(:tweet) { create(:tweet, user: user) }
+  let(:reply) { create(:reply, user: user, tweet: tweet) }
 
+  describe "GET /users/:id/tweets" do
+    context "with valid user id" do
+      it "returns a list of user's tweets" do
+        tweet1 = create(:tweet, user: user)
+
+        get tweets_api_user_path(tweet1.user_id)
+
+        expect(response).to have_http_status(201)
+        expect(response).to match_response_schema("user_tweet")
+      end
+    end
+
+    context "with invalid user id" do
+      it "returns not found" do
+        get tweets_api_user_path(user.id + 1)
+
+        expect(response).to have_http_status(401)
+      end
+    end
+  end
+
+  describe "GET /users/:id/tweets_and_replies" do
+    context "with valid user id" do
+      it "returns tweets and replies for the user" do
+        get tweets_replies_api_user_path(user.id)
+
+        expect(response.status).to have_http_status(:ok)
+        expect(response).to match_response_schema("tweetsreplies")
+      end
+    end
+
+    context "with invalid user id" do
+      it "returns not found" do
+        get tweets_replies_api_user_path(user.id + 1)
         
-    # user_params = {
-    #             user: {
-    #               username: "newuser",
-    #               name: "francisco",
-    #               lastname: "rodriguez",
-    #               email: "newuser@example.com",
-    #               password: "pP@assword12356"
-    #             }
-    #           }
-
-    p user1
-
-        post  users_path, params: user1, as: :json
-        # expect(response.status).to eq(302)
-        expect(response).to match_response_schema("user")
-        end  
+        expect(response).to have_http_status(404)
+      end
     end
-    
-    describe "Get /users" do
-        it "returns http success" do
-        get user_path(:user)
-
-        expect(response.status).to eq(200)
-        expect(response).to match_response_schema("user")
-        end  
-    end 
-
-    describe "Get /users tweets paggination" do 
-        it "return http success" do 
-            get user_path(:tweet, :page, page: 2)
-
-            expect(response.status).to eq(200)
-            expect(response).to match_response_schema("user")
-        end
-    end
-
-    describe "Get /users tweets and replies paggination" do 
-        it "return http success" do 
-            get user_path(:tweet, :page, page: 2)
-
-            expect(response.status).to eq(200)
-            expect(response).to match_response_schema("user")
-        end
-    end
-
-    describe "Patch /users" do
-        it "returns http success" do
-        patch user_path(:user)
-
-        expect(response.status).to eq(200)
-        expect(response).to match_response_schema("user")
-        end  
-    end 
-
-    describe "Put /users" do
-        it "returns http success" do
-        put user_path(:user)
-
-        expect(response.status).to eq(200)
-        expect(response).to match_response_schema("user")
-        end  
-    end
-
-            
-         
+  end
 end 

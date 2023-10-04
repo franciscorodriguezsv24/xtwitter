@@ -10,8 +10,14 @@ class Api::UsersController < Api::ApiController
 
     # GET /users/1 or /users/1.json
     def show
+        @user = User.find_by(params[:id])
 
     end
+
+    def tweets
+            @user = User.find(params[:user_id])
+            @tweets = @user.tweets.order(created_at: :desc)
+    end 
 
     # GET /users/new
     def new
@@ -23,6 +29,11 @@ class Api::UsersController < Api::ApiController
     def edit
         #returns a html 
     end
+
+    def tweets_replies 
+        @user = User.find(params[:user_id])
+            @replies = @user.replies.order(created_at: :desc)
+    end 
 
     # POST /users or /users.json 
     def create 
@@ -70,7 +81,12 @@ class Api::UsersController < Api::ApiController
       end
 
       # Only allow a list of trusted parameters through.
-    #   def
-    #     params.require(:user).permit(:name, :lastname, :username, :email, :password)
-    #   end
+      def user_params
+        params.require(:user).permit(:name, :lastname, :username, :email, :password)
+      end
+
+      def tweet_params
+        params.require(:tweet).permit(:body, :user_id)
+    end
+
 end

@@ -2,17 +2,27 @@ class Api::TweetsController < Api::ApiController
     include TweetStats
 
     before_action :set_tweet, only: [:update, :stats, :retweet, :quote, :bookmark, :unbookmark, :like, :unlike, :tweets_and_replies]
-    
+    skip_before_action :authenticate_token! , only:[:index]
+
     # GET /users/:user_id/tweets
     def index
         @tweets = Tweet.all
-        #render json: { tweet: @tweets }, status: :ok
+        render json: { tweet: @tweets }, status: :ok
     end
 
+    def show
+      @tweet = Tweet.find_by(id:)
+      # if @tweet.nil?
+      #   # Manejar el caso en el que el tweet no existe
+      # else
+      #   # Continuar con la lógica de mostrar el tweet
+      # end
+    end
+    
 
     def tweets_and_replies
         @tweets_and_replies = Tweet.user_tweets_and_replies(@tweet.user_id)
-        #render json: { tweet: @tweets_and_replies }, status: :ok
+        render json: { tweet: @tweets_and_replies }, status: :ok
     end
 
 

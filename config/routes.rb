@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
  
+  
+ 
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
   namespace :api, defaults: {format: :json} do
-  resources :tweets, only:[:new, :create, :update] do 
+    root "main#home"
+    get 'main/home'
+    devise_for :users
+  resources :tweets, only:[:create, :update, :show, :index] do 
     member do 
-      get 'index', to: 'tweets#index'
       get 'stats', to: 'tweets#stats'
       post 'like', to: 'tweets#like'
       delete 'dislike', to: 'tweets#destroy'
@@ -21,10 +25,10 @@ Rails.application.routes.draw do
     end
   end 
 
-  resources :users, only:[:create, :update, :show] do
+  resources :users, only:[:create, :update, :show, :index0] do
     member do 
-      get 'tweets(/page/:page)', to: 'users#tweets'
-      get 'tweets_replies(/page/:page)', to: 'users#tweets_replies'
+      get 'tweets', to: 'users#tweets'
+      get 'tweets_replies', to: 'users#tweets_replies'
 
     end 
   end 
