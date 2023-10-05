@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
- 
-  
- 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     root "main#home"
     get 'main/home'
+    post :auth, to: "authentication#create"
     devise_for :users
   resources :tweets, only:[:create, :update, :show, :index] do 
     member do 
@@ -25,7 +23,7 @@ Rails.application.routes.draw do
     end
   end 
 
-  resources :users, only:[:create, :update, :show, :index0] do
+  resources :users, only:[:create, :update, :show, :index] do
     member do 
       get 'tweets', to: 'users#tweets'
       get 'tweets_replies', to: 'users#tweets_replies'

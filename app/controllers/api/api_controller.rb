@@ -1,7 +1,9 @@
 class Api::ApiController < ApplicationController
-    # attr_reader :current_user
-    before_action :authenticate_api_user!
-    before_action :authenticate_token!
+    skip_before_action :verify_authenticity_token
+    before_action :set_default_format
+    before_action :authenticate_with_http_token
+    before_action :authenticate_user!
+
 
     private 
 
@@ -17,15 +19,7 @@ class Api::ApiController < ApplicationController
     render 'shared/errors', status: :unprocessable_entity
   end
 
-  def authenticate_token! 
-        payload = JsonWebToken.decode(auth_token)
-        @current_user = User.find(payload["id"])
-       rescue JWT::ExpiredSignature
-          render json: {errors:["Auth token has expired"]}, status: :unauthorized
-       rescue JWT::DecodeError
-          render json: {errors: ['invalid auth token']}, status: :unauthorized
-       end 
-  def auth_token
-    @auth_token ||= request.headers.fetch("authorization", "").split(" ").last
+  def set_default_format
+    request.format = :json 
   end
 end   

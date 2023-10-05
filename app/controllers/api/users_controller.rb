@@ -1,10 +1,13 @@
 class Api::UsersController < Api::ApiController
 
+    before_action :authenticate_with_http_token
+
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     # GET /users or /users.json
     def index
         @users = User.all
+        render json: { users: @users }, status: :ok
     end
 
 

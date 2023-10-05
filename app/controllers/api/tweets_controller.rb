@@ -1,6 +1,6 @@
 class Api::TweetsController < Api::ApiController
     include TweetStats
-
+    before_action :authenticate_token!
     before_action :set_tweet, only: [:update, :stats, :retweet, :quote, :bookmark, :unbookmark, :like, :unlike, :tweets_and_replies]
     skip_before_action :authenticate_token! , only:[:index]
 
