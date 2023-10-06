@@ -3,7 +3,6 @@ class Api::SessionsController < Api::ApiController
 
     
     def create 
-        debugger
         user = User.find_by(email: params[:email])
         if user.valid_password?(params[:password])
           session[:user_id] = user.id
