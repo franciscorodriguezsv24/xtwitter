@@ -35,7 +35,7 @@ class TweetsController < ApplicationController
   end
 
   # GET /tweets/1/edit
-  def destroy
+  def destroy_like
     @like = Like.find(params[:id])
   
     if @like.destroy

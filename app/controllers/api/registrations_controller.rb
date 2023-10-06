@@ -1,4 +1,4 @@
-class Api::RegistrationController < Api::ApiController
+class Api::RegistrationsController < Api::ApiController
     skip_before_action :authenticate_user! 
     def create
         user = User.create(user_params)
@@ -15,3 +15,4 @@ class Api::RegistrationController < Api::ApiController
         params.require(:user).permit( :username, :name, :lastname, :email, :password)
     end
 end
+
