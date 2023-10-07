@@ -1,14 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
+<% if user_signed_in?%>
+<p>Bienvenido <%= current_user.username %></p>
+<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<% else %>
+<%= link_to "sign up", new_user_registration_path%>
+<%= link_to "Login", new_user_session_path%>
+<%end%>
+
 <h1>Tweets</h1>
 
 <div id="tweets">
   <% @tweets.each do |tweet| %>
-    <%= render tweet %>
-    <p>
-    </p>
-  <% end %>
+    <%=tweet.id%>
+    <%=tweet.body%>
+    <%=tweet.user.username%>
+  <%= render tweet %>
+  <p>
+    <%= link_to "Show this tweet", tweet %>
+  </p>
+<% end %>
+</div>
 
+<%= link_to "New tweet", new_tweet_path %>
 </div>
 
 

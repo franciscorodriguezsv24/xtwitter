@@ -7,9 +7,11 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {registrations: 'registrations'}
 
+  resources :tweets 
+
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
- end
+  end
   namespace :api do
     post 'sign_in', to: 'sessions#create' 
     delete 'sign_out', to: 'sessions#destroy' 

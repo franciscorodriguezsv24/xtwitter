@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.all 
   end
 
   # GET /tweets/1 or /tweets/1.json
@@ -16,7 +16,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
-    @tweet = Tweet.new(tweet_params)
+    @tweet = Tweet.new
     respond_to do |format|
       format.html # Render HTML template if needed
       format.json { render json: @tweet } # Render JSON response
@@ -88,7 +88,7 @@ class TweetsController < ApplicationController
 
   # POST /tweets or /tweets.json
   def create
-    @tweet = Tweet.new(tweet_params)
+    @tweet = Tweet.create(new_tweet_params)
 
     respond_to do |format|
       if @tweet.save
@@ -133,6 +133,10 @@ class TweetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tweet_params
       params.require(:tweet).permit(:body, :user_id, :retweet, :quote_id)
+    end
+
+    def new_tweet_params
+      params.require(:tweet).permit(:body, :user_id)
     end
 
     def like_params
