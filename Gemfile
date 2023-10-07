@@ -74,3 +74,8 @@ end
 # Use this gems to create authentication 
   gem 'jwt'
   gem 'devise'
+
+# Use this gem to fix and create your frontend design 
+gem "bootstrap"
+
+gem "sassc-rails"
