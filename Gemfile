@@ -77,5 +77,5 @@ end
 
 # Use this gem to fix and create your frontend design 
 gem "bootstrap"
-
+gem "font-awesome-rails"
 gem "sassc-rails"
