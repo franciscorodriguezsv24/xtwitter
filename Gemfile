@@ -60,10 +60,22 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'faker'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '~> 6.1.0'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'rspec-rails', '~> 6.0.0'
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "json-schema"
+ 
+  
 end
+
+# Use this gems to create authentication 
+  gem 'jwt'
+  gem 'devise'
+
+# Use this gem to fix and create your frontend design 
+gem "bootstrap"
+gem "font-awesome-rails"
+gem "sassc-rails"
