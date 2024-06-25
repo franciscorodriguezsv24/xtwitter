@@ -6,7 +6,7 @@ FactoryBot.define do
     name { Faker::Name.first_name }
     lastname { Faker::Name.last_name }
     email { Faker::Internet.email(domain: 'test') }
-    password { "$2Nefi22132556" }
+    password { "$2Nefi2213252" }
     
   end
 end
